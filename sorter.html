@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <title>Sorter</title>
     <style type="text/css" media="screen">
-      textarea {
+      textarea, div {
+        resize: none;
+        font-size: 12pt;
         width: 100%;
       }
     </style>
@@ -12,9 +14,7 @@
   <body>
     <div class="row">
       <div>Enter Here:</div>
-      <textarea id="input">
-        TIF,JMV,MAN, Af1, VAL, SQX, MWD, Ger, IGF, PfB, GIS, syy, P1F, 3FF, Adv, F8W, TFG, SwW, OXS, ScH, eba, ger, 2nv, cup, pea, SSE, SSW, PVO, S1E, B0E, GYS, GGO, JBS, Sya, DHA, CXM, Ske, 363, A4a, Ntd
-      </textarea>
+      <textarea id="input">TIF,JMV,MAN, Af1, VAL, SQX, MWD, Ger, IGF, PfB, GIS, syy, P1F, 3FF, Adv, F8W, TFG, SwW, OXS, ScH, eba, ger, 2nv, cup, pea, SSE, SSW, PVO, S1E, B0E, GYS, GGO, JBS, Sya, DHA, CXM, Ske, 363, A4a, Ntd</textarea>
     </div>
     <div>Sorted Here:</div>
     <div class="row">
@@ -42,8 +42,14 @@
           const trimmed = array.map(function(v) { return v.trim(); });
           const sorted = sorter(trimmed);
           const final = sorted.join(", ");
+
           output.value = final;
 
+          input.style.height = "1px";
+          input.style.height = (25+input.scrollHeight)+"px";
+
+          output.style.height = "1px";
+          output.style.height = (25+output.scrollHeight)+"px";
         };
 
         var setUpdate = function() {
