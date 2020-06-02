@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sorter</title>
+    <style type="text/css" media="screen">
+      textarea {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div>Enter Here:</div>
+      <textarea id="input">
+        TIF,JMV,MAN, Af1, VAL, SQX, MWD, Ger, IGF, PfB, GIS, syy, P1F, 3FF, Adv, F8W, TFG, SwW, OXS, ScH, eba, ger, 2nv, cup, pea, SSE, SSW, PVO, S1E, B0E, GYS, GGO, JBS, Sya, DHA, CXM, Ske, 363, A4a, Ntd
+      </textarea>
+    </div>
+    <div>Sorted Here:</div>
+    <div class="row">
+      <textarea id="output" readonly></textarea>
+    </div>
+
+    <script type="text/javascript">
+      (function() {
+        var input = document.getElementById('input');
+        var output = document.getElementById('output');
+        var timeout;
+
+        var highlight = function () {
+          output.setSelectionRange(0, output.value.length);
+        }
+
+        var sorter = function(array) {
+          return array.sort(function(a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+          });
+        };
+
+        var listener = function() {
+          const array = input.value.match(/[A-Za-z0-9]{3}/g);
+          const trimmed = array.map(function(v) { return v.trim(); });
+          const sorted = sorter(trimmed);
+          const final = sorted.join(", ");
+          output.value = final;
+
+        };
+
+        var setUpdate = function() {
+          timeout = setTimeout(listener, 5);
+        };
+
+        input.addEventListener('change', setUpdate);
+        input.addEventListener('keyup', setUpdate);
+        input.addEventListener('click', setUpdate);
+        setUpdate();
+
+        output.addEventListener("click", highlight);
+        output.addEventListener("focus", highlight);
+      })();
+    </script>
+  </body>
+</html>
